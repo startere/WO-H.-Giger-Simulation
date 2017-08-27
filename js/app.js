@@ -161,7 +161,7 @@ class Game extends createjs.Container{
                 function hiddenSong(){
                     var soundInstance = createjs.Sound.play("killingStrangers");
                 }
-                window.setTimeout(hiddenSong, 24000);
+                window.setTimeout(hiddenSong, 15000);
             }
             
             window.setTimeout(final, 14000);

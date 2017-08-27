@@ -12,6 +12,7 @@ createjs.Sound.registerSound({id:"engine", src:"assets/Engine Noise.mp3"})
 createjs.Sound.registerSound({id:"alien1", src:"assets/Xenomorph1.mp3"})
 createjs.Sound.registerSound({id:"alien2", src:"assets/Xenomorph2.mp3"})
 createjs.Sound.registerSound({id:"alienFinal", src:"assets/XenomorphFinal.mp3"})
+createjs.Sound.registerSound({id:"killingStrangers", src:"assets/Killing Strangers.mp3"})
 
 var initSequence = $('<video width="1500" height="750" autoplay><source src="assets/Initial Sequence.mp4" type="video/mp4"></video>').appendTo(document.body)[0];
 var cjsVideo = new createjs.DOMElement(initSequence);
@@ -136,34 +137,37 @@ class Game extends createjs.Container{
             consoleText.y = 0
         
             stage.addChild(consoleText)
-            window.setTimeout(unlockSuit,120000);
+            window.setTimeout(unlockSuit, 120000);
         }
 
         if(explosionCounter == 10){
-            var soundInstance = createjs.Sound.play("alien1", {loop:1});
+            var soundInstance = createjs.Sound.play("alien1");
         }
 
         if(explosionCounter == 25){
-            var soundInstance = createjs.Sound.play("alien2", {loop:1});
+            var soundInstance = createjs.Sound.play("alien2");
             var soundInstance = createjs.Sound.play("siren", {loop:7})
                 .volume = 0.4;
         }
 
         if(explosionCounter == 45){
-            var soundInstance = createjs.Sound.play("alienFinal", {loop:1});
+            var soundInstance = createjs.Sound.play("alienFinal");
             
             function final(){
                 consoleText.text = "Host disconnected. Please reattach headset to continue..."
                 consoleText.y = 12
                 stage.addChild(consoleText)
                 stage.removeAllEventListeners();
+                function hiddenSong(){
+                    var soundInstance = createjs.Sound.play("killingStrangers");
+                }
+                window.setTimeout(hiddenSong, 24000);
             }
             
-            window.setTimeout(final,14000);
+            window.setTimeout(final, 14000);
         }
     }
 }   
-
 
 class StartScreen extends createjs.Container{
     constructor(stage){
